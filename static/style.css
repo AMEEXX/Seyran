@@ -678,3 +678,25 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--border-secondary);
 }
+/* Typing + deleting effect */
+.hero-title {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.15em solid var(--accent-blue);
+  width: 0ch; /* Start with no visible characters */
+  animation: typing 4s steps(14) infinite, blink-caret 0.75s step-end infinite;
+}
+
+/* Typing and deleting loop */
+@keyframes typing {
+  0%, 10% { width: 0ch; }       /* Start empty */
+  40%, 60% { width: 14ch; }     /* Fully typed */
+  90%, 100% { width: 0ch; }     /* Delete back to empty */
+}
+
+/* Blinking caret effect */
+@keyframes blink-caret {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: var(--accent-blue); }
+}
