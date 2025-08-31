@@ -3,135 +3,368 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generated Exam</title>
+    <title>Generated Exam - LLMQ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .exam-header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #333;
-            padding-bottom: 20px;
+
+        .question-card {
+            transition: all 0.3s ease;
         }
-        .question {
-            margin-bottom: 30px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            page-break-inside: avoid;
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
-        .question-number {
-            font-weight: bold;
-            margin-bottom: 10px;
+
+        .diagram-container {
+            transition: transform 0.3s ease;
         }
-        .diagram {
-            margin: 20px 0;
-            text-align: center;
-            page-break-inside: avoid;
+
+        .diagram-container:hover {
+            transform: scale(1.02);
         }
-        .diagram img {
-            max-width: 100%;
-            height: auto;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .diagram-info {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 10px;
-            font-style: italic;
-        }
-        .marks {
-            color: #666;
-            font-style: italic;
-        }
-        .subject-type {
-            color: #444;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-        .actions {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        .btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
+
         @media print {
-            .actions {
-                display: none;
+            .no-print {
+                display: none !important;
             }
+            
             body {
-                margin: 0;
-                padding: 20px;
+                background: white !important;
+                color: black !important;
             }
-            .question {
-                border: none;
-                border-bottom: 1px solid #ddd;
+            
+            .glass-effect {
+                background: white !important;
+                border: 1px solid #ddd !important;
+                backdrop-filter: none !important;
             }
+            
+            .question-card {
+                background: white !important;
+                color: black !important;
+                border: 1px solid #ddd !important;
+                box-shadow: none !important;
+                margin-bottom: 1rem;
+                page-break-inside: avoid;
+            }
+            
+            .text-gray-100 { color: black !important; }
+            .text-gray-200 { color: #333 !important; }
+            .text-gray-300 { color: #555 !important; }
+            .text-gray-400 { color: #777 !important; }
+            .bg-black { background: white !important; }
         }
     </style>
 </head>
-<body>
-    <div class="actions">
-        <button class="btn" onclick="window.print()">Print Exam</button>
-        <a href="/" class="btn">Back to Home</a>
+<body class="bg-black text-gray-100 font-sans min-h-screen">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-gray-800 rounded-full opacity-10 animate-pulse"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-gray-700 rounded-full opacity-5 animate-pulse" style="animation-delay: 1s;"></div>
     </div>
 
-    <div class="exam-header">
-        <h1>Generated Exam</h1>
-        <p class="subject-type">Subject: {{ exam_data.subject_type }}</p>
-    </div>
-
-    {% set ns = namespace(question_number=0) %}
-    {% for question in exam_data.questions %}
-    {% if question.get('question') %}
-    {% set ns.question_number = ns.question_number + 1 %}
-    <div class="question">
-        <div class="question-number">Question {{ ns.question_number }}</div>
-        <div class="question-text">{{ question.question }}</div>
-        
-        {% if question.diagram_success and question.diagram_base64 %}
-        <div class="diagram">
-            <div class="diagram-info">
-                <strong>{{ question.diagram_type }}</strong> (Generated using {{ question.diagram_library }})
+    <!-- Header -->
+    <header class="relative z-10 border-b border-gray-800 bg-black/90 backdrop-blur-sm no-print">
+        <div class="max-w-7xl mx-auto px-6 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-gray-600 to-gray-800 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-100">Generated Exam</h1>
+                        <p class="text-sm text-gray-400">AI-Generated Question Paper</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button onclick="window.print()" 
+                            class="flex items-center space-x-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg transition-all duration-300 hover:scale-105">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                        </svg>
+                        <span>Print Exam</span>
+                    </button>
+                    <a href="/" 
+                       class="flex items-center space-x-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-lg transition-all duration-300 hover:scale-105">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m0 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10M9 21h6"></path>
+                        </svg>
+                        <span>Back to Home</span>
+                    </a>
+                </div>
             </div>
-            <img src="data:image/png;base64,{{ question.diagram_base64 }}" 
-                 alt="Contextual diagram for question {{ ns.question_number }}"
-                 onerror="this.style.display='none'">
         </div>
-        {% endif %}
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-6xl mx-auto px-6 py-12">
         
-        <div class="marks">Marks: {{ question.marks }}</div>
-    </div>
-    {% endif %}
-    {% endfor %}
+        <!-- Exam Header -->
+        <section class="text-center mb-12">
+            <div class="glass-effect rounded-2xl p-8 mb-8">
+                <h1 class="text-4xl font-bold text-gray-100 mb-4">
+                    AI-Generated Examination Paper
+                </h1>
+                
+                <div class="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-300">
+                    <div class="flex items-center space-x-2 bg-gray-900/50 px-4 py-2 rounded-full">
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2M7 21h2m3 0h2M7 3h2m3 0h2m3 0h2M7 7h2m3 0h2m3 0h2M7 11h2m3 0h2m3 0h2m-6 4h2"></path>
+                        </svg>
+                        <span>Subject: <strong>{{ exam_data.subject_type or 'General' }}</strong></span>
+                    </div>
+                    
+                    {% if exam_data.has_contextual_diagrams %}
+                    <div class="flex items-center space-x-2 bg-green-900/30 px-4 py-2 rounded-full border border-green-800/50">
+                        <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <span>With AI Diagrams</span>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="flex items-center space-x-2 bg-blue-900/30 px-4 py-2 rounded-full border border-blue-800/50">
+                        <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>Duration: 3 Hours</span>
+                    </div>
+                </div>
+
+                {% if exam_data.diagram_stats %}
+                <div class="mt-6 text-xs text-gray-400">
+                    <p>Generated {{ exam_data.diagram_stats.successful_diagrams }} contextual diagrams from {{ exam_data.diagram_stats.total_questions }} questions</p>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Instructions -->
+            <div class="glass-effect rounded-xl p-6 text-left">
+                <h3 class="text-lg font-semibold text-gray-200 mb-4 flex items-center">
+                    <svg class="w-5 h-5 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Instructions
+                </h3>
+                <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+                    <div class="space-y-2">
+                        <p>• Answer all questions</p>
+                        <p>• Use diagrams where indicated</p>
+                        <p>• Show all working steps</p>
+                    </div>
+                    <div class="space-y-2">
+                        <p>• Time: 3 hours</p>
+                        <p>• Write clearly and legibly</p>
+                        <p>• Refer to diagrams in your answers</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Questions -->
+        <section class="space-y-8">
+            {% set ns = namespace(question_number=0) %}
+            {% for question in exam_data.questions %}
+            {% if question.get('question') %}
+            {% set ns.question_number = ns.question_number + 1 %}
+            
+            <div class="question-card glass-effect rounded-2xl p-8">
+                <!-- Question Header -->
+                <div class="flex items-start justify-between mb-6">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex items-center justify-center w-8 h-8 bg-gray-700 rounded-full text-sm font-bold">
+                                {{ ns.question_number }}
+                            </div>
+                            {% if question.get('section') %}
+                            <span class="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-xs font-medium">
+                                {{ question.section }}
+                            </span>
+                            {% endif %}
+                            {% if question.get('topic') %}
+                            <span class="px-3 py-1 bg-gray-900/50 text-gray-400 rounded-full text-xs">
+                                {{ question.topic }}
+                            </span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="text-lg text-gray-200 leading-relaxed mb-4">
+                            {{ question.question }}
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col items-end space-y-2 ml-6">
+                        <div class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-lg text-sm font-medium border border-blue-800/50">
+                            {{ question.marks }} {{ 'mark' if question.marks == 1 else 'marks' }}
+                        </div>
+                        
+                        {% if question.get('has_diagram') %}
+                        <div class="px-3 py-1 bg-green-900/30 text-green-300 rounded-lg text-xs border border-green-800/50">
+                            <svg class="w-3 h-3 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            Diagram
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Diagram Section -->
+                {% if question.get('diagram_success') and question.get('diagram_base64') %}
+                <div class="diagram-container bg-gray-900/30 rounded-xl p-6 mb-6 border border-gray-700/50">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <span class="text-sm font-medium text-gray-300">
+                                {{ question.get('diagram_type', 'Contextual Diagram') }}
+                            </span>
+                        </div>
+                        {% if question.get('diagram_library') %}
+                        <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">
+                            Generated with {{ question.diagram_library }}
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="text-center">
+                        <img src="data:image/png;base64,{{ question.diagram_base64 }}" 
+                             alt="Contextual diagram for question {{ ns.question_number }}"
+                             class="max-w-full h-auto rounded-lg border border-gray-600 mx-auto"
+                             style="max-height: 400px;"
+                             onerror="this.parentElement.parentElement.style.display='none'">
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Answer Space -->
+                <div class="border-t border-gray-700 pt-6">
+                    <div class="text-sm text-gray-400 mb-3">Answer:</div>
+                    <div class="min-h-32 border border-dashed border-gray-600 rounded-lg p-4">
+                        <div class="text-gray-500 text-sm italic">Write your answer here...</div>
+                    </div>
+                </div>
+            </div>
+            
+            {% endif %}
+            {% endfor %}
+        </section>
+
+        <!-- Exam Summary (No Print) -->
+        <section class="mt-16 no-print">
+            <div class="glass-effect rounded-2xl p-8 text-center">
+                <h3 class="text-xl font-semibold text-gray-200 mb-4">Exam Summary</h3>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-gray-900/50 rounded-xl p-4">
+                        <div class="text-2xl font-bold text-blue-400 mb-2">{{ ns.question_number }}</div>
+                        <div class="text-sm text-gray-400">Total Questions</div>
+                    </div>
+                    {% if exam_data.diagram_stats %}
+                    <div class="bg-gray-900/50 rounded-xl p-4">
+                        <div class="text-2xl font-bold text-green-400 mb-2">{{ exam_data.diagram_stats.successful_diagrams }}</div>
+                        <div class="text-sm text-gray-400">AI Diagrams</div>
+                    </div>
+                    {% endif %}
+                    <div class="bg-gray-900/50 rounded-xl p-4">
+                        <div class="text-2xl font-bold text-yellow-400 mb-2">
+                            {{ exam_data.questions | selectattr('marks') | map(attribute='marks') | sum }}
+                        </div>
+                        <div class="text-sm text-gray-400">Total Marks</div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-sm text-gray-400">
+                    <p>This exam was generated using advanced AI and machine learning techniques.</p>
+                    <p>All diagrams are contextually relevant and automatically generated.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-gray-800 bg-black/90 backdrop-blur-sm mt-20 no-print">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <div class="text-center text-gray-400">
+                <p>&copy; 2025 LLMQ AI Exam Generator. Intelligent assessment powered by machine learning.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Handle diagram loading errors
-        document.querySelectorAll('.diagram img').forEach(img => {
-            img.onerror = function() {
-                this.parentElement.style.display = 'none';
+        // Handle diagram loading errors gracefully
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.diagram-container img');
+            images.forEach(img => {
+                img.onerror = function() {
+                    const container = this.closest('.diagram-container');
+                    if (container) {
+                        container.style.display = 'none';
+                    }
+                };
+            });
+
+            // Add smooth animations to question cards
+            const questions = document.querySelectorAll('.question-card');
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
             };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+
+            questions.forEach(question => {
+                question.style.opacity = '0';
+                question.style.transform = 'translateY(20px)';
+                question.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(question);
+            });
+        });
+
+        // Print optimization
+        window.addEventListener('beforeprint', function() {
+            document.body.style.background = 'white';
+            document.body.style.color = 'black';
+        });
+
+        window.addEventListener('afterprint', function() {
+            document.body.style.background = '';
+            document.body.style.color = '';
         });
     </script>
 </body>
-</html> 
+</html>
