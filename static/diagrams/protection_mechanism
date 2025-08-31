@@ -1,0 +1,11 @@
+digraph {
+	System [label=System]
+	Program [label=Program]
+	User [label=User]
+	Program -> System [label=Request]
+	User -> System [label=Request]
+	System -> Program [label=Grant]
+	System -> User [label=Deny]
+	Program -> User [label=Deny]
+	User -> Program [label=Deny]
+}

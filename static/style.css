@@ -1,0 +1,284 @@
+body {
+    font-family: 'Roboto', sans-serif; /* Using a more modern professional font */
+    margin: 0;
+    padding: 0;
+    background-color: #FFF5E6; /* Light orange/yellow background from image */
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Needed for pseudo-element background */
+}
+
+/* Add a subtle background pattern */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(#FFD700 1px, transparent 1px); /* Gold/Yellow pattern */
+    background-size: 25px 25px; /* Slightly larger pattern */
+    opacity: 0.3; /* Maintain opacity */
+    z-index: -1; /* Place behind content */
+}
+
+.header {
+    background: linear-gradient(to right, #FFA07A, #FFD700); /* Lighter, yellowish gradient */
+    padding: 15px 30px; /* Increased padding */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    position: relative; /* Needed for z-index */
+    z-index: 1; /* Ensure header is above background pattern */
+}
+
+.header .logo {
+    height: 50px; /* Adjusted size */
+    margin-right: 15px; /* Adjusted spacing */
+}
+
+.header .site-title {
+    font-family: 'Montserrat', sans-serif; /* Different font for title */
+    font-size: 30px; /* Adjusted size */
+    font-weight: bold;
+    color: #333;
+    margin-right: 20px; /* Added margin */
+}
+
+.header .tagline {
+    font-size: 16px; /* Adjusted size */
+    color: #333;
+    flex-grow: 1; /* Allow tagline to take available space */
+    text-align: center; /* Center the tagline */
+}
+
+.header .highlight {
+    color: #E55300; /* A slightly warmer red for highlight */
+}
+
+.auth-links {
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    font-size: 16px; /* Adjusted size */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.auth-links:hover {
+    color: #FF8C00; /* Orange hover color */
+}
+
+.auth-links .user-icon {
+    height: 28px; /* Adjusted size */
+    margin-right: 8px; /* Adjusted spacing */
+}
+
+.main-content {
+    padding: 40px 20px; /* Increased padding */
+    max-width: 900px; /* Max width for content */
+    margin: 20px auto; /* Center the content and add space above/below */
+    flex-grow: 1; /* Allow main content to take available space */
+    background-color: #ffffff; /* White background for content area */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+    overflow: hidden; /* Clear floats/prevent content overflow */
+}
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 40px; /* Adjusted margin */
+    padding-bottom: 20px; /* Added padding bottom */
+    border-bottom: 1px solid #eee; /* Subtle separator */
+}
+
+.welcome-section h1 {
+    color: #333;
+    border-bottom: none; /* Remove underline here */
+    padding-bottom: 0; /* Remove padding */
+    font-size: 36px; /* Larger size */
+    margin-bottom: 10px; /* Adjusted margin */
+}
+
+.welcome-section p {
+    max-width: 700px; /* Adjusted max width */
+    margin: 10px auto;
+    line-height: 1.8; /* Increased line height for readability */
+    font-size: 17px; /* Adjusted size */
+    color: #555; /* Slightly darker text */
+}
+
+.generator-section {
+    padding: 30px 0; /* Adjusted padding */
+    text-align: center; /* Center content in this section */
+}
+
+.generator-section h2 {
+    color: #FF8C00; /* Darker orange for heading */
+    margin-bottom: 30px; /* Increased margin */
+    font-size: 28px; /* Adjusted size */
+    font-weight: bold;
+}
+
+.upload-section {
+    margin-bottom: 25px; /* Increased margin */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically align items */
+    justify-content: center; /* Center items horizontally */
+    flex-wrap: wrap; /* Allow items to wrap on small screens */
+    gap: 15px; /* Add space between upload elements */
+}
+
+.upload-section label {
+    margin-bottom: 0; /* Remove bottom margin */
+    /* margin-right: 10px; Remove right margin, replaced by gap */
+    font-weight: bold;
+    font-size: 16px; /* Adjusted size */
+    color: #555; /* Slightly darker text */
+    flex-basis: 180px; /* Give labels a base width */
+    text-align: right; /* Align label text to the right */
+}
+
+/* Styling for custom file input */
+.upload-section input[type="file"] {
+    display: none; /* Hide the default file input */
+}
+
+.custom-file-upload {
+    border: 2px dashed #FFD700; /* Yellowish dashed border */
+    display: inline-block;
+    padding: 12px 20px; /* Adjusted padding */
+    cursor: pointer;
+    background-color: #fff; /* White background */
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    color: #FFA500; /* Orange color */
+    font-weight: bold;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.custom-file-upload:hover {
+    background-color: #FFFACD; /* Lighter yellowish on hover */
+    border-color: #FFB347; /* Slightly darker yellowish on hover */
+}
+
+.upload-section .file-name {
+    margin-left: 0; /* Remove left margin, replaced by gap */
+    font-style: italic;
+    color: #777; /* Darker grey for filename */
+    font-size: 15px; /* Adjusted size */
+    max-width: 200px; /* Limit filename width */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for long filenames */
+    white-space: nowrap; /* Prevent wrapping */
+    text-align: left; /* Align filename to the left */
+}
+
+button[type="submit"] {
+    background-color: #FFA500; /* Orange button */
+    color: white;
+    padding: 12px 20px; /* Increased padding */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px; /* Adjusted size */
+    margin-top: 30px; /* Increased margin */
+    display: block;
+    width: auto; /* Auto width to center */
+    margin-left: auto; /* Center button */
+    margin-right: auto; /* Center button */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition and slight scale */
+}
+
+button[type="submit"]:hover {
+    background-color: #FF8C00; /* Darker orange on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Add simple animation for loading text */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* CSS for a simple spinner */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1); /* Light border */
+    border-top: 4px solid #FFA500; /* Orange spinner color */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite; /* Spin animation */
+    display: inline-block; /* Align with text if needed */
+    margin-right: 10px; /* Space between spinner and text */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #FFA500; /* Match loading text color to theme */
+    /* Add simple animation for loading text */
+    /* animation: pulse 1.5s infinite; Keep pulse for text if both are shown */
+}
+
+.download-links {
+    margin-top: 30px; /* Increased margin */
+    text-align: center;
+    padding-top: 20px; /* Added padding top */
+    border-top: 1px solid #eee; /* Subtle separator */
+}
+
+.download-links h3 {
+    color: #333;
+    margin-bottom: 20px; /* Increased margin */
+    font-size: 20px;
+}
+
+.download-links a {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px 20px; /* Adjusted padding */
+    background-color: #FFD700; /* Gold color for download buttons */
+    color: #333; /* Dark text for contrast */
+    border: 1px solid #FFA500; /* Orange border */
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition and slight scale */
+}
+
+.download-links a:hover {
+    background-color: #FFB347; /* Slightly darker yellowish on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.error-message {
+    margin-top: 20px;
+    text-align: center;
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: auto; /* Push footer to the bottom */
+    color: #555; /* Slightly darker text */
+    font-size: 14px;
+    background-color: #ffcc66; /* Light orange background */
+    width: 100%;
+} 

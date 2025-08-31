@@ -1,0 +1,9 @@
+digraph {
+	P1 [label="P1 - 6ms"]
+	P2 [label="P2 - 4ms"]
+	P3 [label="P3 - 5ms"]
+	P4 [label="P4 - 3ms"]
+	P1 -> P2 [constraint=false]
+	P2 -> P3 [constraint=false]
+	P3 -> P4 [constraint=false]
+}

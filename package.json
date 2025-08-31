@@ -1,0 +1,17 @@
+{
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.12"
+  },
+  "name": "seyran",
+  "version": "1.0.0",
+  "description": "LLMQ (Large Language Model Questionnaire) is an advanced AI-powered exam generation system that creates comprehensive, contextual exams from uploaded PDF documents. The system uses Retrieval-Augmented Generation (RAG) with OpenAI's GPT models to generate questions and incorporates a sophisticated diagram generation system supporting 11+ visualization libraries.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

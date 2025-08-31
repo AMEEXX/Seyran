@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seyran | Generated Question Paper</title>
+    <link href="{{ url_for('static', filename='tailwind.css') }}" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-yellow-50 to-orange-100 min-h-screen font-sans">
+        <div class="fixed top-6 right-6 flex gap-4 z-50">
+            <button class="px-4 py-2 bg-orange-500 text-white rounded shadow hover:bg-orange-600 transition" onclick="window.print()">🖨️ Print QP</button>
+            <a href="/" class="px-4 py-2 bg-yellow-400 text-gray-900 rounded shadow hover:bg-yellow-500 transition">🏠 Home</a>
+        </div>
+
+        <div class="max-w-4xl mx-auto mt-12 bg-white rounded-xl shadow-lg p-8">
+            <div class="text-center mb-8 border-b pb-6">
+                <h1 class="text-4xl font-bold text-orange-600 font-montserrat mb-2">Seyran | Generated Question Paper</h1>
+                <div class="inline-block bg-yellow-100 text-orange-700 px-4 py-2 rounded font-semibold mb-1">Date: {{ exam_date if exam_date else "" }}</div>
+                <div class="inline-block bg-yellow-100 text-orange-700 px-4 py-2 rounded font-semibold">Subject: {{ subject if subject else "" }}</div>
+            </div>
+
+            <table class="w-full border-collapse mb-8">
+                <thead>
+                    <tr class="bg-yellow-200">
+                        <th class="p-4 text-left text-orange-700 font-bold">Question</th>
+                        <th class="p-4 text-left text-orange-700 font-bold">Answer</th>
+                        <th class="p-4 text-left text-orange-700 font-bold">Diagram</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for question in exam_data %}
+                    <tr class="border-b hover:bg-yellow-50 transition">
+                        <td class="p-4 font-medium text-gray-800">{{ question.question }}</td>
+                        <td class="p-4 text-gray-700">{{ question.answer }}</td>
+                        <td class="p-4 text-center">
+                            {% if 'diagram' in question %}
+                                <img src="data:image/png;base64,{{ question.diagram_image }}" alt="Diagram for Q{{ loop.index }}" class="mx-auto rounded shadow max-w-xs">
+                            {% else %}
+                                <span class="text-gray-400 italic">No diagram</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="text-center text-gray-600 mt-8 py-4 bg-yellow-100 rounded-lg">
+                &copy; 2025 Seyran | All rights reserved.
+            </div>
+        </div>
+    </body>
+</html>

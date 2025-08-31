@@ -1,0 +1,8 @@
+digraph {
+	500 [label="Current Position: 500"]
+	500 -> 200 [label=300]
+	200 -> 700 [label=500]
+	700 -> 900 [label=200]
+	900 -> 500 [label=400]
+	500 -> 500 [label=0]
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Exam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .exam-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            page-break-inside: avoid;
+        }
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .diagram {
+            margin: 20px 0;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+        .diagram img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .diagram-info {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        .marks {
+            color: #666;
+            font-style: italic;
+        }
+        .subject-type {
+            color: #444;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .actions {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        @media print {
+            .actions {
+                display: none;
+            }
+            body {
+                margin: 0;
+                padding: 20px;
+            }
+            .question {
+                border: none;
+                border-bottom: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="actions">
+        <button class="btn" onclick="window.print()">Print Exam</button>
+        <a href="/" class="btn">Back to Home</a>
+    </div>
+
+    <div class="exam-header">
+        <h1>Generated Exam</h1>
+        <p class="subject-type">Subject: {{ exam_data.subject_type }}</p>
+    </div>
+
+    {% set ns = namespace(question_number=0) %}
+    {% for question in exam_data.questions %}
+    {% if question.get('question') %}
+    {% set ns.question_number = ns.question_number + 1 %}
+    <div class="question">
+        <div class="question-number">Question {{ ns.question_number }}</div>
+        <div class="question-text">{{ question.question }}</div>
+        
+        {% if question.diagram_success and question.diagram_base64 %}
+        <div class="diagram">
+            <div class="diagram-info">
+                <strong>{{ question.diagram_type }}</strong> (Generated using {{ question.diagram_library }})
+            </div>
+            <img src="data:image/png;base64,{{ question.diagram_base64 }}" 
+                 alt="Contextual diagram for question {{ ns.question_number }}"
+                 onerror="this.style.display='none'">
+        </div>
+        {% endif %}
+        
+        <div class="marks">Marks: {{ question.marks }}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <script>
+        // Handle diagram loading errors
+        document.querySelectorAll('.diagram img').forEach(img => {
+            img.onerror = function() {
+                this.parentElement.style.display = 'none';
+            };
+        });
+    </script>
+</body>
+</html> 

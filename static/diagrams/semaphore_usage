@@ -1,0 +1,12 @@
+digraph {
+	Resource1 [label="Resource 1"]
+	Resource2 [label="Resource 2"]
+	Resource3 [label="Resource 3"]
+	Resource4 [label="Resource 4"]
+	Resource5 [label="Resource 5"]
+	Resource1 -> "Process A"
+	Resource2 -> "Process A"
+	Resource3 -> "Process A"
+	Resource4 -> "Process B"
+	Resource5 -> "Process B"
+}

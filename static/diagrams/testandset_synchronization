@@ -1,0 +1,7 @@
+digraph {
+	Locked [label=Locked color=red shape=doublecircle]
+	Unlocked [label=Unlocked color=green shape=circle]
+	Locked -> Locked [label=T1 color=blue]
+	Locked -> Unlocked [label=T2 color=red]
+	Unlocked -> Locked [label=T1 color=red]
+}

@@ -1,0 +1,50 @@
+langchain
+langchain-openai
+openai
+faiss-cpu
+python-dotenv
+unstructured
+unstructured-inference
+pdf2image
+pytesseract
+reportlab
+pydantic
+numpy
+matplotlib
+graphviz
+python-mermaid
+pillow
+pymupdf
+flask
+networkx
+diagrams
+
+# Enhanced diagram libraries for comprehensive visualization
+plotly>=5.0.0
+seaborn>=0.11.0
+schemdraw>=0.15
+scipy>=1.7.0
+pandas>=1.3.0
+sympy>=1.9
+statsmodels>=0.13.0
+scikit-learn>=1.0.0
+bokeh>=2.4.0
+pygraphviz>=1.9
+anytree>=2.8.0
+ete3>=3.1.0
+scapy>=2.4.0
+control>=0.9.0
+
+# Additional dependencies for specialized libraries
+kaleido>=0.2.1  # For plotly image export
+psutil>=5.8.0   # For system monitoring diagrams
+pycairo>=1.20.0  # For advanced graphics rendering
+
+# NEW: Advanced diagram and visualization libraries
+mermaid-py>=0.8.0  # Mermaid diagram generation
+pyvis>=0.3.0  # Interactive network visualizations
+pyecharts>=2.0.0  # Chinese charts library with rich features
+vega_datasets>=0.9.0  # Sample datasets for visualization
+pydot>=4.0.0  # DOT language graph descriptions
+dash-cytoscape>=1.0.0  # Interactive network visualization for Dash
+altair>=4.2.0  # Statistical visualization grammar

@@ -1,0 +1,11 @@
+digraph {
+	P0 [label="Process P0"]
+	P1 [label="Process P1"]
+	P2 [label="Process P2"]
+	P0 -> P1 [label="turn = 1"]
+	P1 -> P0 [label="turn = 0"]
+	P0 -> P2 [label="turn = 2"]
+	P2 -> P0 [label="turn = 0"]
+	P1 -> P2 [label="turn = 2"]
+	P2 -> P1 [label="turn = 1"]
+}
